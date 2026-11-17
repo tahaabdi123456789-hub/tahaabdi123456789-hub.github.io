@@ -8,137 +8,298 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@500;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Kalameh';
+    src:url('https://cdn.jsdelivr.net/gh/Neurolla/Lilac-Beauty@main/public/font/_Woff2/KalamehWebFaNum-Regular.woff2') format('woff2');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Kalameh';
+    src:url('https://cdn.jsdelivr.net/gh/Neurolla/Lilac-Beauty@main/public/font/_Woff2/KalamehWebFaNum-Bold.woff2') format('woff2');
+    font-weight:700; font-style:normal; font-display:swap;
+  }
   :root{
-    --green:#0d3b2a;
-    --green2:#125239;
+    --green:#0c3826;
+    --green2:#14532d;
     --gold:#c9a227;
-    --gold-light:#e8cf7a;
+    --gold2:#e9d189;
     --cream:#faf6ec;
-    --ink:#22302a;
+    --card:#ffffff;
+    --ink:#243129;
+    --muted:#75817a;
+    --line:#e9e1cb;
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
-    font-family:'Vazirmatn',Tahoma,sans-serif;
-    background:var(--cream);
-    color:var(--ink);
-    min-height:100vh;
+    font-family:'Kalameh','Vazirmatn',Tahoma,sans-serif;
+    background:var(--cream); color:var(--ink);
+    -webkit-font-smoothing:antialiased;
   }
-  /* watermark نمونه */
-  .wm{
-    position:fixed; inset:0; pointer-events:none; z-index:50;
-    display:flex; align-items:center; justify-content:center; overflow:hidden;
-  }
-  .wm span{
-    font-size:7rem; font-weight:700; color:rgba(13,59,42,.05);
-    transform:rotate(-24deg); white-space:nowrap;
-  }
+  .wm{position:fixed; inset:0; pointer-events:none; z-index:60; display:flex; align-items:center; justify-content:center; overflow:hidden}
+  .wm span{font-size:7.5rem; font-weight:700; color:rgba(12,56,38,.045); transform:rotate(-24deg); white-space:nowrap}
+
+  /* ---------- Hero ---------- */
   header{
-    background:linear-gradient(160deg,var(--green) 0%,var(--green2) 100%);
-    color:#fff; text-align:center;
-    padding:2.6rem 1rem 2rem;
-    border-bottom:4px solid var(--gold);
+    position:relative; text-align:center; color:#fff;
+    background:
+      radial-gradient(120% 90% at 50% 0%, rgba(201,162,39,.22), transparent 55%),
+      linear-gradient(165deg, #0a2e20 0%, var(--green) 55%, var(--green2) 100%);
+    padding:2.4rem 1rem 1.7rem;
+    border-bottom:3px solid var(--gold);
   }
   .badge{
-    display:inline-block;
-    border:1px solid var(--gold-light); color:var(--gold-light);
-    border-radius:999px; padding:.15rem .9rem; font-size:.8rem; margin-bottom:1rem;
+    display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.2px;
+    color:var(--gold2); border:1px solid rgba(233,209,137,.55);
+    padding:.28rem .95rem; border-radius:999px; background:rgba(201,162,39,.08);
   }
   h1{
-    font-family:'Noto Nastaliq Urdu',serif;
-    font-size:2.5rem; line-height:2.2; color:var(--gold-light); font-weight:700;
+    font-family:'Noto Nastaliq Urdu',serif; font-weight:700;
+    font-size:2.9rem; line-height:2.1; margin-top:.6rem;
+    background:linear-gradient(180deg,#f3e2a0, var(--gold) 70%, #a37f14);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 2px 10px rgba(0,0,0,.35));
   }
-  .sub{margin-top:.4rem; font-size:1rem; color:#e9e2cd}
-  main{max-width:640px; margin:0 auto; padding:1.4rem 1rem 2rem}
+  .tagline{color:#efe8cf; font-size:1rem; margin-top:.2rem}
+  .chips{display:flex; flex-wrap:wrap; gap:.45rem; justify-content:center; margin-top:1.05rem}
+  .chip{
+    display:inline-flex; align-items:center; gap:.35rem;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+    color:#f4efe0; border-radius:999px; padding:.34rem .8rem; font-size:.82rem;
+    text-decoration:none; backdrop-filter:blur(3px);
+  }
+  .chip b{color:var(--gold2)}
+
+  /* ---------- Sticky nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,246,236,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navin{max-width:680px; margin:0 auto; display:flex; gap:.45rem; padding:.6rem .9rem; overflow-x:auto; scrollbar-width:none}
+  .navin::-webkit-scrollbar{display:none}
+  .navin a{
+    flex:0 0 auto; text-decoration:none; color:var(--green);
+    border:1.5px solid var(--green); border-radius:999px;
+    padding:.34rem .95rem; font-size:.88rem; font-weight:700; transition:.2s;
+  }
+  .navin a.on{background:var(--green); color:var(--gold2)}
+
+  /* ---------- Sections & cards ---------- */
+  main{max-width:680px; margin:0 auto; padding:.4rem .95rem 1rem}
+  section{scroll-margin-top:74px}
   h2{
-    color:var(--green); font-size:1.25rem; margin:1.6rem 0 .8rem;
     display:flex; align-items:center; gap:.6rem;
+    color:var(--green); font-size:1.28rem; font-weight:700; margin:1.7rem 0 .9rem;
   }
-  h2::after{content:""; flex:1; height:2px; background:linear-gradient(to left,var(--gold),transparent)}
-  .item{
-    background:#fff; border:1px solid #e7dfc8; border-radius:14px;
-    padding:.95rem 1.1rem; margin-bottom:.7rem;
-    display:flex; justify-content:space-between; align-items:center; gap:1rem;
-    box-shadow:0 1px 3px rgba(13,59,42,.06);
+  h2 .dot{width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(201,162,39,.18)}
+  h2::after{content:""; flex:1; height:2px; background:linear-gradient(to left, var(--gold), transparent)}
+  .card{
+    position:relative; display:flex; gap:.85rem;
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:.7rem; margin-bottom:.75rem;
+    box-shadow:0 2px 10px rgba(12,56,38,.05);
   }
-  .item .name{font-weight:700; font-size:1.05rem; color:var(--green)}
-  .item .desc{font-size:.85rem; color:#6b756f; margin-top:.15rem}
+  .card img{
+    width:104px; height:104px; object-fit:cover; border-radius:13px; flex:0 0 auto;
+    background:#eee6cf;
+  }
+  .body{flex:1; display:flex; flex-direction:column; min-width:0}
+  .name{font-weight:700; font-size:1.06rem; color:var(--green)}
+  .desc{font-size:.84rem; color:var(--muted); line-height:1.9; margin-top:.15rem}
+  .row{margin-top:auto; padding-top:.45rem; display:flex; align-items:center; justify-content:space-between}
+  .price{font-weight:700; color:var(--green); font-size:1rem}
+  .price small{font-size:.72rem; color:var(--muted); font-weight:400}
   .sig{
-    background:var(--gold); color:#fff; font-size:.72rem; font-weight:700;
-    border-radius:999px; padding:.2rem .7rem; white-space:nowrap;
+    background:linear-gradient(135deg, var(--gold), #a37f14); color:#fff;
+    font-size:.7rem; font-weight:700; border-radius:999px; padding:.22rem .65rem; white-space:nowrap;
   }
+
+  /* ---------- Footer ---------- */
   footer{
-    background:var(--green); color:#f2ecd9; text-align:center;
-    padding:1.8rem 1rem 2.2rem; margin-top:2rem; border-top:4px solid var(--gold);
+    margin-top:2.2rem; background:linear-gradient(165deg,#0a2e20,var(--green));
+    color:#f2ecd9; text-align:center; padding:1.9rem 1rem 2.3rem; border-top:3px solid var(--gold);
   }
-  footer p{margin:.35rem 0; font-size:.95rem}
-  footer a{color:var(--gold-light); text-decoration:none; font-weight:700}
-  .tel{font-size:1.15rem}
+  footer .fname{font-family:'Noto Nastaliq Urdu',serif; font-size:1.7rem; line-height:2; color:var(--gold2)}
+  footer p{margin:.3rem 0; font-size:.93rem}
+  footer a{color:var(--gold2); text-decoration:none; font-weight:700}
+  .tel{font-size:1.12rem}
 </style>
 </head>
 <body>
 <div class="wm"><span>نمونه</span></div>
 
 <header>
-  <div class="badge">نسخه نمونه منوی دیجیتال</div>
+  <span class="badge">نسخه نمونه منوی دیجیتال</span>
   <h1>باغ رستوران شاهان</h1>
-  <p class="sub">طعم اصیل کباب در دل باغ</p>
+  <p class="tagline">طعم اصیل جگر و کباب در دل باغ، همراه با موسیقی زنده</p>
+  <div class="chips">
+    <span class="chip">📍 همدان، بلوار ارم، کوچه اردوگاه ابوذر</span>
+    <a class="chip" href="tel:+989183053235">📞 <b>۰۹۱۸-۳۰۵-۳۲۳۵</b></a>
+    <a class="chip" href="https://www.instagram.com/shahan.__restaurant">📷 اینستاگرام شاهان</a>
+  </div>
 </header>
 
+<nav>
+  <div class="navin">
+    <a href="#pishghaza">پیش‌غذا</a>
+    <a href="#kabab">کباب و گریل</a>
+    <a href="#sini">سینی و پک</a>
+    <a href="#nooshidani">نوشیدنی</a>
+  </div>
+</nav>
+
 <main>
-  <h2>کباب و گریل</h2>
+  <section id="pishghaza">
+    <h2><span class="dot"></span>پیش‌غذا</h2>
 
-  <div class="item">
-    <div>
-      <div class="name">بال یعقوب</div>
-      <div class="desc">امضای رستوران شاهان</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/Iynr8hbDHDJIWzoxNHt9QOJfzhY33M0t76KTMEvIiTsVbL69FrRoiKNvx3Fw7b33a2z7KACMpmWPE0KvQVyV/n-salad.jpg" alt="سالاد شیرازی" loading="lazy">
+      <div class="body">
+        <div class="name">سالاد شیرازی</div>
+        <p class="desc">خیار، گوجه و پیاز تازه با آب‌لیمو و نعناع خشک</p>
+        <div class="row"><span class="price">۶۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
     </div>
-    <span class="sig">ویژه شاهان</span>
-  </div>
 
-  <div class="item">
-    <div>
-      <div class="name">کتف یعقوب</div>
-      <div class="desc">همراه همیشگی بال یعقوب</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/ZcR1tM-0u-IVauJgeE4bnkV4HqrKGhGz9UvnAllbANMu4LF30fcGHrCHYetK45vOHNkzQ-VmC1pvAfG-TwY/n-mast.jpg" alt="ماست موسیر" loading="lazy">
+      <div class="body">
+        <div class="name">ماست موسیر</div>
+        <p class="desc">ماست چکیده سنتی با موسیر، همراه همیشگی کباب</p>
+        <div class="row"><span class="price">۵۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <div>
-      <div class="name">جگر</div>
-      <div class="desc">تازه و کبابی</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/x2enN8cI99oRoqy3WecbItRuc3YWxwtBy8Jd0PXXp5rTP5_TPX1Hnog7Wh-Yj2d16FmkqI7Hy25p3lAj8o8twyk/n-zeytoon.jpg" alt="زیتون پرورده" loading="lazy">
+      <div class="body">
+        <div class="name">زیتون پرورده</div>
+        <p class="desc">زیتون سبز با گردو، رب انار و سبزی‌های معطر</p>
+        <div class="row"><span class="price">۸۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
     </div>
-  </div>
 
-  <div class="item">
-    <div>
-      <div class="name">کباب</div>
-      <div class="desc">کباب سنتی شاهان</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/8GGZL2XzjxxnaYIPnRoZKWLUcV1tT6HiIkq6V4QwNYTJE3Zx2nfkajtk8gg4d1nCGyP1vLdmI1EFOYVrq_M/n-soup.jpg" alt="سوپ جو" loading="lazy">
+      <div class="body">
+        <div class="name">سوپ جو</div>
+        <p class="desc">سوپ جوی داغ با سبزیجات تازه، شروع گرم یک وعده</p>
+        <div class="row"><span class="price">۷۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <h2>سینی و پک</h2>
+  <section id="kabab">
+    <h2><span class="dot"></span>کباب و گریل</h2>
 
-  <div class="item">
-    <div>
-      <div class="name">سینی مخصوص شاهان</div>
-      <div class="desc">سینی کامل برای جمع‌های خانوادگی</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/M54PQkwzPFZazwkfy8rsFEDh2n8Fwzi8kafPHqg9FuF1ltMqS8Z_Nm4IEJSNqOR7G-yfDBMB2bfAUjCqK0O1/n-wings.jpg" alt="بال یعقوب" loading="lazy">
+      <div class="body">
+        <div class="name">بال یعقوب</div>
+        <p class="desc">امضای رستوران شاهان؛ بال کبابی با مرینیت و ادویه مخصوص</p>
+        <div class="row"><span class="price">۲۹۵٬۰۰۰ <small>تومان</small></span><span class="sig">ویژه شاهان</span></div>
+      </div>
     </div>
-    <span class="sig">پیشنهاد ما</span>
-  </div>
 
-  <div class="item">
-    <div>
-      <div class="name">پک اقتصادی بال و کتف</div>
-      <div class="desc">انتخاب به‌صرفه برای دورهمی</div>
+    <div class="card">
+      <img src="https://s101.picofile.com/d/0UJu1AHdVKoqmTkZwkpwdNj-l1q2s0gctE4aXpOe-worevFVhHzEYBgqQzkynOGm-3wRo482WTiAANeoG-a8/n-kataf.jpg" alt="کتف یعقوب" loading="lazy">
+      <div class="body">
+        <div class="name">کتف یعقوب</div>
+        <p class="desc">تکه‌های نرم کتف گوسفندی، کباب‌شده روی ذغال</p>
+        <div class="row"><span class="price">۳۴۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
     </div>
-  </div>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/TQ196nZDuykGh-M_0RJYYmldB68-tfJcdYcCLvgELMchBjkldCdym71H09ckfLo34yVAq2L5i2C_5U9bJcTl/n-jegar.jpg" alt="جگر کبابی" loading="lazy">
+      <div class="body">
+        <div class="name">جگر</div>
+        <p class="desc">جگر تازه روی سیخ با نان داغ، پیاز و سماق</p>
+        <div class="row"><span class="price">۲۶۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/wFg0KL3vrRQaMF7xjjHWbr8ZUfOdzP_goGGZnBoUuv2Qw8eWzcCjN7r9J1FDeQO0uoJTl_BuWe8g13TfFDMPixUB/n-koobideh.jpg" alt="کباب کوبیده" loading="lazy">
+      <div class="body">
+        <div class="name">کباب کوبیده</div>
+        <p class="desc">دو سیخ کوبیده آبدار با گوجه کبابی و برنج یا نان</p>
+        <div class="row"><span class="price">۳۱۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/HgLQlMQnH-mMdI0mDw35u-qgwEFn5rvbb9JJqwGozb8uJA9eoTqjLilHpy2rl_R-7KRUoPqZJCeIOd61qEBvaQ/n-joojeh.jpg" alt="جوجه کباب" loading="lazy">
+      <div class="body">
+        <div class="name">جوجه کباب</div>
+        <p class="desc">جوجه زعفرانی مرینیت‌شده، نرم و خوش‌عطر</p>
+        <div class="row"><span class="price">۲۸۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sini">
+    <h2><span class="dot"></span>سینی و پک</h2>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/qAsQOIFWLXbxyrsMVwzlmn5kJ_jhYEdrvxoLcRqjJkDrbGJMlwfN6buBU7RcvEuMLRttkQM_dSbnInPGKMY/n-sini.jpg" alt="سینی مخصوص شاهان" loading="lazy">
+      <div class="body">
+        <div class="name">سینی مخصوص شاهان</div>
+        <p class="desc">ترکیب کامل کباب‌های شاهان با مخلفات، مناسب ۳ تا ۴ نفر</p>
+        <div class="row"><span class="price">۸۹۵٬۰۰۰ <small>تومان</small></span><span class="sig">پیشنهاد ما</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/M54PQkwzPFZazwkfy8rsFEDh2n8Fwzi8kafPHqg9FuF1ltMqS8Z_Nm4IEJSNqOR7G-yfDBMB2bfAUjCqK0O1/n-wings.jpg" alt="پک اقتصادی بال و کتف" loading="lazy">
+      <div class="body">
+        <div class="name">پک اقتصادی بال و کتف</div>
+        <p class="desc">بال و کتف یعقوب در یک پک به‌صرفه برای دورهمی</p>
+        <div class="row"><span class="price">۴۹۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nooshidani">
+    <h2><span class="dot"></span>نوشیدنی</h2>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/uXwx_WiS2a5zMxdSRjclDyf6_nH3q9htt4ZPWq88ajyR2fx4PPwBwYUiZ3i5XFDNLqcllP1m6F4Wt2Wf0l_-/n-doogh.jpg" alt="دوغ محلی" loading="lazy">
+      <div class="body">
+        <div class="name">دوغ محلی</div>
+        <p class="desc">دوغ سنتی خنک با نعناع، بهترین همراه جگر و کباب</p>
+        <div class="row"><span class="price">۴۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://s101.picofile.com/d/NdAGhYkx7uI2TedNmJNSycPQDv70N4dmsS-tWnEGZ96LEqE2mH6gjENQ-qXCYBch8o39FE0Ag3621366xw/n-tea.jpg" alt="چای" loading="lazy">
+      <div class="body">
+        <div class="name">چای تازه‌دم</div>
+        <p class="desc">چای قوری با نبات، پایان شیرین یک وعده باغی</p>
+        <div class="row"><span class="price">۳۵٬۰۰۰ <small>تومان</small></span></div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <p>📍 همدان، بلوار ارم، کوچه اردوگاه ابوذر</p>
+  <div class="fname">باغ رستوران شاهان</div>
+  <p>📍 همدان، بلوار ارم، کوچه اردوگاه ابوذر (باغ رستوران اطلسی سابق)</p>
   <p class="tel">📞 <a href="tel:+989183053235">۰۹۱۸-۳۰۵-۳۲۳۵</a></p>
-  <p>📷 اینستاگرام: <a href="https://www.instagram.com/shahan.__restaurant">shahan.__restaurant@</a></p>
+  <p>📷 <a href="https://www.instagram.com/shahan.__restaurant">shahan.__restaurant</a></p>
 </footer>
 
+<script>
+  const links = [...document.querySelectorAll('.navin a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  const spy = () => {
+    let i = secs.length - 1;
+    while (i > 0 && secs[i].getBoundingClientRect().top > 120) i--;
+    links.forEach((a, j) => a.classList.toggle('on', j === i));
+  };
+  addEventListener('scroll', spy, {passive:true}); spy();
+</script>
 </body>
 </html>
